@@ -92,8 +92,8 @@
             <option value="/product-add">Product add</option>
         </select>
         <a href="/information-user">Users Information</a>
-        <a href="/home">Orders</a>
-        <a href="/home">Cancel the Orders</a>
+        <a href="/admin-orders-see">Orders</a>
+        <a href="/admin-orders-cancel-see">Cancel the Orders</a>
         <a href="/">Out</a>
     </nav>
 </header>

@@ -69,4 +69,42 @@ public class OrderDb {
         connection.close();
 
     }
+
+    public List<Order> getAllOrdersAdmin() throws SQLException {
+        Connection connection = DbConfig.getDataSource().getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM orders where status =false");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<Order> orders = new ArrayList<>();
+        while (resultSet.next()) {
+            Order order = new Order();
+            order.setId(resultSet.getInt("id"));
+            order.setUserId(resultSet.getInt("user_id"));
+            order.setDate(resultSet.getDate("date").toLocalDate().atStartOfDay());
+            order.setStatus(resultSet.getBoolean("status"));
+            order.setTotal(resultSet.getDouble("total_price"));
+            orders.add(order);
+
+        }
+        return orders;
+
+    }
+
+    public List<Order> getAllOrderAdminCancels() throws SQLException {
+        Connection connection = DbConfig.getDataSource().getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM orders where status =true");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<Order> orders = new ArrayList<>();
+        while (resultSet.next()) {
+            Order order = new Order();
+            order.setId(resultSet.getInt("id"));
+            order.setUserId(resultSet.getInt("user_id"));
+            order.setDate(resultSet.getDate("date").toLocalDate().atStartOfDay());
+            order.setStatus(resultSet.getBoolean("status"));
+            order.setTotal(resultSet.getDouble("total_price"));
+            orders.add(order);
+
+        }
+        return orders;
+
+    }
 }
